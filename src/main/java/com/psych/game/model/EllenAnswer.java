@@ -1,5 +1,6 @@
 package com.psych.game.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ public class EllenAnswer extends Auditable{
 
     //many ellen answers can be there for one question
     @ManyToOne
+    @JsonBackReference
     @NotNull
     private Question question;
 

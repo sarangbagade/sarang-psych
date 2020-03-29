@@ -1,5 +1,6 @@
 package com.psych.game.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,9 +19,16 @@ public class Question extends Auditable {
     @Getter @Setter
     private String correctAnswer;
 
+    public Question()
+    {
+
+    }
+
     //if the question is deleted, then all of its ellen answers should be deleted
     //one question can have many ellen answers
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
+    //this is because if the question is deleted all of its ellen answers should be deleted
+    @JsonManagedReference
     private Set<EllenAnswer> ellenAnswers;
 
     @Enumerated(EnumType.STRING)

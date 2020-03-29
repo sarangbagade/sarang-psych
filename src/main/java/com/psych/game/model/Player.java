@@ -1,5 +1,7 @@
 package com.psych.game.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="players")
-public class Player extends User implements Serializable {
+public class Player extends User{
 
     @NotBlank
     @Getter
@@ -26,10 +28,12 @@ public class Player extends User implements Serializable {
     private String picUrl;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     @Getter @Setter
     private Stat Stat = new Stat();
 
     @ManyToMany(mappedBy = "players")
+    @JsonIdentityReference
     @Getter @Setter
     private Set<Game> games = new HashSet<>();
 
